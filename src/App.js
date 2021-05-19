@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./styles/App.css";
 import Form from "./components/form.component";
 import Weather from "./components/weather.component";
 import "bootstrap/dist/css/bootstrap.min.css";
