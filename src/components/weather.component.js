@@ -18,11 +18,11 @@ const Weather = ({
         </h5>
 
         {/* Get Celsius, convert to Farenheit */}
-        {temp_celsius ? (
+        {temp_celsius && (
           <h1 className="py-2">
             {Math.round(temp_celsius * (9 / 5) + 32)}&deg;
           </h1>
-        ) : null}
+        )}
 
         {/* get max and min temps, convert to farenheit*/}
         {maxminTemp(
