@@ -1,29 +1,53 @@
-import "weather-icons/css/weather-icons.css";
+import React from "react";
+import "../styles/weather.style.css";
 
-export const weatherIcon = (icons, rangeId) => {
-  switch (true) {
-    case rangeId >= 200 && rangeId < 232:
-      this.setState({ icon: icons.Thunderstorm });
-      break;
-    case rangeId >= 300 && rangeId <= 321:
-      this.setState({ icon: icons.Drizzle });
-      break;
-    case rangeId >= 500 && rangeId <= 521:
-      this.setState({ icon: icons.Rain });
-      break;
-    case rangeId >= 600 && rangeId <= 622:
-      this.setState({ icon: icons.Snow });
-      break;
-    case rangeId >= 701 && rangeId <= 781:
-      this.setState({ icon: icons.Atmosphere });
-      break;
-    case rangeId === 800:
-      this.setState({ icon: icons.Clear });
-      break;
-    case rangeId >= 801 && rangeId <= 804:
-      this.setState({ icon: icons.Clouds });
-      break;
-    default:
-      this.setState({ icon: icons.Clouds });
-  }
+const Weather = ({
+  cityname,
+  weatherIcon,
+  temp_celsius,
+  temp_min,
+  temp_max,
+  description,
+}) => {
+  return (
+    <div className="container text-light">
+      <div className="Card">
+        <h1 className="text-white py-3">{cityname}</h1>
+        <h5 className="py-4">
+          <i className={`wi ${weatherIcon} display-1`} />
+        </h5>
+
+        {/* Get Celsius, convert to Farenheit */}
+        {temp_celsius && (
+          <h1 className="py-2">
+            {Math.round(temp_celsius * (9 / 5) + 32)}&deg;
+          </h1>
+        )}
+
+        {/* get max and min temps, convert to farenheit*/}
+        {maxminTemp(
+          Math.round(temp_min * (9 / 5) + 32),
+          Math.round(temp_max * (9 / 5) + 32)
+        )}
+
+        {/* Weather description */}
+        <h4 className="py-3">
+          {description.charAt(0).toUpperCase() + description.slice(1)}
+        </h4>
+      </div>
+    </div>
+  );
 };
+
+export default Weather;
+
+function maxminTemp(min, max) {
+  if (max && min) {
+    return (
+      <h3>
+        <span className="px-4">{min}&deg;</span>
+        <span className="px-4">{max}&deg;</span>
+      </h3>
+    );
+  }
+}
